@@ -1,4 +1,4 @@
-# Reestructura de nuestro servidor - Clase 27 - Galeano Pablo
+# PRE ENTREGRA 3 - Galeano Pablo
 ## Comisión: 47295
 
 ### Alumno: Pablo Galeano
@@ -13,9 +13,13 @@
 
 #### What's New
 
-* Se agregó la capa de servicios entre el controlador y el modelo
+* Se agregaron opciones para la compra de productos
 
-* Se agregó el archivo .env para ocultar datos sensibles
+* Se agregó el patrón Estrategy en lugar de Factory.
+
+* Se agregó aplicó DTO.
+
+* Se agregó el envío de mails a traves de Gmail.
 
 * Se hicieron los test propuestos.
 
@@ -93,7 +97,11 @@ npm install passport-jwt
 ```
 npm install dotenv
 ```
+### Nodemailer
 
+```
+npm install nodemailer
+```
 
 ##
 * Para correr  la aplicación en modo desarrollador se debe escribir en la terminal:
