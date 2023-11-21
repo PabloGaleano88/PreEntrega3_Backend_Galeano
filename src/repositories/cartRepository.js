@@ -23,7 +23,7 @@ class CartRepository{
         }
     }
 
-    async addProductsToCart(cid, pid, quantity) {
+    async addProductToCart(cid, pid, quantity) {
         try {
             const cart = await cartsModel.findOne({_id: cid})
             await productsModel.findById(pid)
@@ -41,7 +41,7 @@ class CartRepository{
             return cartUpdated
         }
         catch (error) {
-                return (`Revisa los datos ingresados.Ocurrió el siguiente error\n${e.name}\n${e.message}`)
+                return (`Revisa los datos ingresados.Ocurrió el siguiente error\n${error.name}\n${error.message}`)
             }
         }
 
@@ -95,6 +95,7 @@ class CartRepository{
             return(`Ocurrió un error al intentar actualizar la cantidad del producto\n Revisa el id del carrito o del producto\n${e.name}\n${e.message}`)
         }
     }
+
 }
 
 export default CartRepository

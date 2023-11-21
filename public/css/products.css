@@ -76,6 +76,14 @@ button{
     right: 10px;
 }
 
+.go_to_chat{
+    z-index: 100;
+    height: 25px;
+    position: fixed;
+    top: 0px;
+    right: 150px;
+}
+
 footer{
     height: 50px;
     position: fixed;

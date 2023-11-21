@@ -5,7 +5,6 @@ import { userModel } from '../dao/MongoDB/models/userModel.js'
 import CartManager from '../dao/MongoDB/CartManager.js'
 import GitHubStrategy from 'passport-github2'
 import jwt from 'passport-jwt'
-import dotenv from 'dotenv'
 
 const JWTStrategy = jwt.Strategy
 const ExtractJWT = jwt.ExtractJwt
@@ -43,7 +42,7 @@ const initializePassport = () => {
     passport.use('login', new LocalStrategy({ usernameField: 'email' }, async (username, password, done) => {
         try {
             const usernameLowerCase = username.toLowerCase()
-            const user = await userModel.findOne({ email: usernameLowerCase })
+            const user = await userModel.findOne({ email: usernameLowerCase }).populate('cartId')
             if (!user) {
                 return done(null, false)
             }
@@ -65,13 +64,14 @@ const initializePassport = () => {
     }, async (acccesToken, refreshToken, profile, done) => {
         try {
             const email = profile.emails[0].value
-            const user = await userModel.findOne({ email })
-
+            const user = await userModel.findOne({ email }).populate('cartId')
             if (!user) {
+                const cartId = await cartManager.addCart()
                 const newUser = userModel.create({
                     first_name: profile._json.name,
                     last_name: '',
                     age: 18,
+                    cartId,
                     password: '',
                     email,
                 })

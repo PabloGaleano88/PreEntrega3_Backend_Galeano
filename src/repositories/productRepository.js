@@ -40,7 +40,6 @@ class productRepository{
     async deleteProduct(id) {
         try{
             await productsModel.findByIdAndDelete(id)
-            return this.getProducts()
         }
         catch(error){
             throw error
@@ -57,14 +56,14 @@ class productRepository{
         }
     }
 
-    async updateProductById(id, updateFields) {
+    async updateProductById(id, updateField,value) {
 
         try {
-            await productsModel.findOneAndUpdate({ _id: id }, updateFields)
-            return this.findById(id)
+            await productsModel.findOneAndUpdate({ _id: id }, { $set: { "stock": value } })
+            return this.findProductById(id)
         }
         catch (error) {
-            throw error
+            console.log(error)
         }
     }
 
